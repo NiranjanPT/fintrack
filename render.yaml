@@ -5,7 +5,7 @@ services:
   - type: web
     name: fintrack-api
     runtime: node
-    rootDir: server
+    rootDir: fintrack/server
     buildCommand: npm install
     startCommand: npm start
     healthCheckPath: /api/health

@@ -80,7 +80,6 @@ fintrack/
 │   ├── .env.example
 │   └── package.json
 │
-├── render.yaml                     # Render blueprint for the backend
 ├── .gitignore
 ├── package.json                    # Root scripts (run both apps together)
 └── README.md
@@ -329,7 +328,7 @@ Follow [MongoDB Setup → Option B](#option-b--mongodb-atlas-cloud-also-used-for
 ### 2. Backend – Render
 1. On [render.com](https://render.com) choose **New → Web Service** and connect your GitHub repository.
 2. Settings:
-   - **Root Directory:** `server`
+   - **Root Directory:** `fintrack/server`
    - **Runtime:** Node
    - **Build Command:** `npm install`
    - **Start Command:** `npm start`
@@ -342,12 +341,12 @@ Follow [MongoDB Setup → Option B](#option-b--mongodb-atlas-cloud-also-used-for
    - (Render sets `PORT` automatically.)
 4. Deploy, then open `https://<your-service>.onrender.com/api/health` to check it.
 
-*Alternative:* **New → Blueprint** uses the included `render.yaml` and asks only for the secret values.
+*Alternative:* **New → Blueprint** uses `render.yaml` in the repository root and asks only for the secret values.
 
 ### 3. Frontend – Vercel
 1. On [vercel.com](https://vercel.com) choose **Add New → Project** and import the same repository.
 2. Settings:
-   - **Root Directory:** `client`
+   - **Root Directory:** `fintrack/client`
    - **Framework Preset:** Vite (build `npm run build`, output `dist`)
 3. **Environment variable:** `VITE_API_URL` = `https://<your-service>.onrender.com/api`
 4. Deploy. `client/vercel.json` rewrites all paths to `index.html`, so React Router pages such as `/budgets` work on refresh.
