@@ -3,10 +3,17 @@ import axios from 'axios';
 
 export const TOKEN_KEY = 'fintrack_token';
 
+// Local: "/api" is proxied by Vite to http://localhost:5000
+// Production: VITE_API_URL points to the Render backend.
+// "/api" is added automatically if the URL was configured without it.
+const getBaseURL = () => {
+  const url = (import.meta.env.VITE_API_URL || '').trim().replace(/\/+$/, '');
+  if (!url) return '/api';
+  return url.endsWith('/api') ? url : `${url}/api`;
+};
+
 const api = axios.create({
-  // Local: "/api" is proxied by Vite to http://localhost:5000
-  // Production: VITE_API_URL points to the Render backend
-  baseURL: import.meta.env.VITE_API_URL || '/api',
+  baseURL: getBaseURL(),
   headers: { 'Content-Type': 'application/json' },
   timeout: 20000,
 });
