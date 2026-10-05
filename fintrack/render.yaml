@@ -1,0 +1,22 @@
+# Render Blueprint for the FinTrack backend (Experiment 11 - Deployment)
+# Render -> New -> Blueprint -> select this repository.
+# Secret values (MONGODB_URI, JWT_SECRET, CLIENT_URL) are entered in the Render dashboard.
+services:
+  - type: web
+    name: fintrack-api
+    runtime: node
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CLIENT_URL
+        sync: false
